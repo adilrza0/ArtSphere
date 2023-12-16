@@ -131,7 +131,7 @@ const Register = () => {
   return (
     <>
       {success ? (
-        <section className={`${styles.register_form_section} ${styles.Nunito}`} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
+        <section  className={`${styles.register_form_section} ${styles.Nunito}`} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
           <Center>
             <VStack spacing={6} align="center">
               <Text fontSize="3xl" color="purple">
@@ -150,7 +150,7 @@ const Register = () => {
           </Center>
         </section>
       ) : (
-        <Box p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
+        <Box backgroundSize={"100% 150%"}  backgroundRepeat={"no-repeat"} backgroundAttachment={"fixed"} backgroundImage={"https://st.deviantart.net/eclipse/package-picker/background-sale-updated.webp?1"} p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
         <section className={`${styles.register_form_section} ${styles.Nunito}`} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
           <p
             ref={errRef}

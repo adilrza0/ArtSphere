@@ -194,6 +194,46 @@ export default function PricingPage() {
         })}
       </PriceContainer>
 
+        <h1 className='text-center fw-normal my-5' style={{ color: `${theme}` === "dark" ? "white" : "black" }}>Compare Plan</h1>
+        <div className='w-75  m-auto'>
+          <table className='table text-center'>
+            <thead>
+              <tr>
+                <th style={{ width: "34%" }}></th>
+                <th style={{ width: "22%" }}>{cardDetails[0].type}</th>
+                <th style={{ width: "22%" }}>{cardDetails[1].type}</th>
+                <th style={{ width: "22%" }}>{cardDetails[2].type}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Access Monetization</th>
+                <td>❌</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+              </tr>
+              <tr>
+                <th>create Private Collections</th>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+              </tr>
+              <tr>
+                <th>ArtProtect</th>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+              </tr>
+              <tr>
+                <th>analytics And Insight</th>
+                <td>❌</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+                <td className='text-success fs-4 text'>&#10003;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
 
 
     </DIV>
@@ -204,8 +244,8 @@ const DIV=styled.div`
  margin: -10px;
   height: 250%;
   background-image: url(${"https://st.deviantart.net/eclipse/package-picker/background-sale-updated.webp?1"});
-  /* background-repeat: no-repeat;
-  background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   text-align: center;
   color: white;
   padding: 20px;

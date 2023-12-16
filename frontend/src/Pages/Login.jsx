@@ -137,7 +137,7 @@ const Login = () => {
   };
 
   return (
-    <Box p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
+    <Box backgroundImage={"https://st.deviantart.net/eclipse/package-picker/background-sale-updated.webp?1"} p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
     <section style={{ marginTop: "2rem", fontSize: "1.3rem", marginBottom: "2rem" }} className={`${styles.login_form_section} ${styles.Nunito}`}>
       <p
         ref={errRef}
