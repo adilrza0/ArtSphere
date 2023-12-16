@@ -1,6 +1,6 @@
 
 import { Link as RouteLink, useNavigate } from "react-router-dom"
-import { Box, Stack, Image, Input, InputGroup, InputRightElement, Button, IconButton, Link as ChakraLink, Icon, HStack } from "@chakra-ui/react"
+import { Box, VStack, Stack, Image, Input, InputGroup, InputRightElement, Button, IconButton, Link as ChakraLink, Icon, HStack ,Menu,MenuButton , MenuItem, MenuList, } from "@chakra-ui/react"
 import { useState, useEffect } from "react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { BsMoonStars, BsSun } from "react-icons/bs"
@@ -10,6 +10,7 @@ import { logout, themeChange } from "../Redux/action";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { HamburgerIcon, AddIcon, WarningIcon,ChevronDownIcon } from '@chakra-ui/icons'
 
 const Navbar = () => {
     const [search, setSearch] = useState("");
@@ -107,40 +108,99 @@ const Navbar = () => {
             </InputGroup>
             <Box display={"flex"} justifyContent={"space-around"} gap="1.5rem" alignItems={"center"}>
                 <Icon as={theme === "dark" ? BsSun : BsMoonStars} fontSize={"xl"} onClick={() => changeTheme(dispatch)} />
-                <ChakraLink to="/arts" as={RouteLink} style={{ textDecoration: "none", color: "coral" }} _hover={{ color: "#8FDBA7" }} fontSize="2xl">Arts</ChakraLink>
+                <ChakraLink to="/arts" color={theme === "dark" ? "white" : "black"} as={RouteLink} style={{ textDecoration: "none", color: "coral" }} _hover={{ color: "#8FDBA7" }} fontSize="2xl">Arts</ChakraLink>
                 {
                     isAuth ?
                         (
-                            <HStack spacing="1rem">
+                            <VStack  spacing="1rem">
 
-                                <Image src={avatar} borderRadius='full' boxSize='55px'></Image>
-                                <Box fontSize="lg">{username}</Box>
-                                <ICONBOX><Link to="/upload"><FaPlus fontSize="1.5rem" color={theme === "dark" ? "white" : "black"} /></Link></ICONBOX>
+                                <PROFILE>
+                                <Box className="profile" fontSize="lg">{username}</Box>
+                                <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA8cTn1-RRcQ_T4-cf40vYi4sjFEADIdog1TqwvXO3kw&s"} borderRadius='full' boxSize='55px'></Image>
+                                <ICONBOX className="profile"><Link to="/upload"><FaPlus fontSize="1.5rem" color={theme === "dark" ? "white" : "black"} /></Link></ICONBOX>
                                 {
                                     subscription === "basic" ? (
-                                        <Button bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={() => { navigate("/plans") }}>
+                                        <Button className="profile" bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "black" }} onClick={() => { navigate("/plans") }}>
                                             Subscribe
                                         </Button>
                                     ) : subscription === "premium" ? (
-                                        <Button bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={() => { navigate("/plans") }}>
+                                        <Button className="profile" bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "black" }} onClick={() => { navigate("/plans") }}>
                                             Upgrade
                                         </Button>
                                     ) : ""
                                 }
 
-                                <Button bgColor="#FF7F50" color="white" _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={handleLogout}>Logout</Button>
-                            </HStack>
+                                <Button className="profile" bgColor="#FF7F50" color="white" _hover={{ backgroundColor: "#91D9A8", color: "black" }} onClick={handleLogout}>Logout</Button>
+                                </PROFILE>
+                                
+                                
+                                <DIV className="menu">
+                                <Menu  >
+                                    {({ isOpen }) => (
+                                        <>
+                                        <MenuButton isActive={isOpen} as={Button} rightIcon={<HamburgerIcon />}>
+                                        
+                                           
+                                        </MenuButton>
+                                        <MenuList bgColor={theme === "dark" ? "#15191E" : "#f7edee"} color={theme === "dark" ? "white" : "black"}>
+                                            <MenuItem bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} color={theme === "dark" ? "white" : "black"}> <ICONBOX><Link to="/upload"><FaPlus fontSize="1.5rem" color={theme === "dark" ? "white" : "black"} /></Link></ICONBOX></MenuItem>
+                                            <MenuItem bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} color={theme === "dark" ? "white" : "black"} onClick={() => alert('Kagebunshin')}>
+                                                {
+                                                    subscription === "basic" ? (
+                                                        <Button bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={() => { navigate("/plans") }}>
+                                                            Subscribe
+                                                        </Button>
+                                                    ) : subscription === "premium" ? (
+                                                        <Button bgColor="#FF7F50" color={"white"} _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={() => { navigate("/plans") }}>
+                                                            Upgrade
+                                                        </Button>
+                                                    ) : ""
+                                                }
+                                            </MenuItem>
+                                            <MenuItem bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} color={theme === "dark" ? "white" : "black"}>
+                                                <Button bgColor="#FF7F50" color="white" _hover={{ backgroundColor: "#91D9A8", color: "coral" }} onClick={handleLogout}>Logout</Button>
+                                            </MenuItem>
+                                        </MenuList>
+                                        </>
+                                    )}
+                                </Menu>
+                                </DIV>
+                            </VStack>
                         ) : (<ChakraLink to="/login" as={RouteLink} style={{ textDecoration: "none", color: theme === "dark" ? "coral" : "blue" }} _hover={{ color: "#8FDBA7" }} fontSize="xl">Login</ChakraLink>)
                 }
             </Box>
+            
         </Stack>
     </Box>
 }
 
 const ICONBOX = styled.div`
+
 &:hover{
     cursor: pointer;
 }
 `;
 
+const DIV=styled.div`
+
+
+display: none;
+
+.profile{
+    visibility: hidden;
+}
+@media only screen and (max-width: 580px){
+    display: block;
+}
+    
+`
+
+const PROFILE=styled.div`
+display: flex;
+gap:10px;
+@media only screen and (max-width: 580px){
+    display: none;
+}
+    
+`
 export default Navbar;

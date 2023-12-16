@@ -1,19 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Text, Image, Box, Flex } from "@chakra-ui/react";
 import { Link } from 'react-router-dom';
 import { Explore } from '../Components/Explore';
 import Hero from '../Components/Hero';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import PricingCard from '../Components/PricingCard';
 // import PricingPage from './PricingPage';
 
 import styled from 'styled-components';
+import axios from 'axios';
+import { login } from '../Redux/action';
 
 
 const Home = () => {
   const theme = useSelector((store) => store.authReducer.theme);
+
+  const dispatch =useDispatch()
+
+  useEffect(()=>{
+    
+   
+    axios.post("https://artsphere.onrender.com/users/login", )
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userID", res.data.userId);
+        localStorage.setItem("avatar", res.data.avatar);
+        localStorage.setItem("userName", res.data.username);
+        localStorage.setItem("subscription", res.data.subscription);
+        login(dispatch, { username: res.data.username, avatar: res.data.avatar, subscription: res.data.subscription, userID: res.data.userID });
+      })
+      .catch(err => console.log(err.message));
+
+  },[])
+
 
   return (
     <>

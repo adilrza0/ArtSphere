@@ -19,11 +19,13 @@ import {
   Text,
   VStack,
   useToast,
+  Box
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
 import axios from "axios";
 import styles from "../style_modules/register.module.css";
+import { useSelector } from "react-redux";
 
 const USER_REGEX = /^[A-Za-z][A-Za-z0-9]{4,}@[A-Za-z0-9]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,15}$/;
@@ -32,6 +34,9 @@ const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
   const toast = useToast();
+
+  
+  const theme = useSelector((store) => store.authReducer.theme);
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -145,6 +150,7 @@ const Register = () => {
           </Center>
         </section>
       ) : (
+        <Box p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
         <section className={`${styles.register_form_section} ${styles.Nunito}`} style={{ marginTop: "2rem", marginBottom: "2rem" }}>
           <p
             ref={errRef}
@@ -154,7 +160,7 @@ const Register = () => {
             {errMsg}
           </p>
           <Center>
-            <Heading size="2xl" as="b" style={{ color: "purple" }}>
+            <Heading size="2xl" as="b" style={{ color: "black" }}>
               Register
             </Heading>
           </Center>
@@ -181,6 +187,7 @@ const Register = () => {
                 </span>
               </FormLabel>
               <Input
+              bg={"white"}
                 type="text"
                 size={"lg"}
                 id="username"
@@ -220,6 +227,7 @@ const Register = () => {
                 Name:
               </FormLabel>
               <Input
+              bg={"white"}
                 type="text"
                 size={"lg"}
                 id="name"
@@ -242,6 +250,7 @@ const Register = () => {
                 Username:
               </FormLabel>
               <Input
+                bg={"white"}
                 type="text"
                 size={"lg"}
                 id="username"
@@ -264,6 +273,7 @@ const Register = () => {
                 Avatar:
               </FormLabel>
               <Input
+              bg={"white"}
                 type="text"
                 size={"lg"}
                 id="avatar"
@@ -286,6 +296,7 @@ const Register = () => {
                 Age:
               </FormLabel>
               <Input
+                bg={"white"}
                 type="text"
                 size={"lg"}
                 id="age"
@@ -320,6 +331,7 @@ const Register = () => {
               </FormLabel>
               <InputGroup>
                 <Input
+                bg={"white"}
                   type={show ? "text" : "password"}
                   size={"lg"}
                   placeholder="Enter Password"
@@ -388,6 +400,7 @@ const Register = () => {
               </FormLabel>
               <InputGroup>
                 <Input
+                bg={"white"}
                   type={confirmShow ? "text" : "password"}
                   size={"lg"}
                   id="confirm_pwd"
@@ -456,6 +469,7 @@ const Register = () => {
             </span>
           </p>
         </section>
+        </Box>
       )}
     </>
   )

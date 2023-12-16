@@ -8,6 +8,7 @@ import {
   InputGroup,
   InputRightElement,
   useToast,
+  Box,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Link as ChakraLink } from "@chakra-ui/react";
@@ -31,6 +32,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,15}$/;
 
 const Login = () => {
   const isAuth = useSelector((store) => store.authReducer.isAuth);
+  const theme = useSelector((store) => store.authReducer.theme);
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -135,6 +137,7 @@ const Login = () => {
   };
 
   return (
+    <Box p={"50px"} h={"100%"} bgColor={theme === "dark" ? "#15191E" : "#edf2f7"} >
     <section style={{ marginTop: "2rem", fontSize: "1.3rem", marginBottom: "2rem" }} className={`${styles.login_form_section} ${styles.Nunito}`}>
       <p
         ref={errRef}
@@ -144,7 +147,7 @@ const Login = () => {
         {errMsg}
       </p>
       <Center>
-        <Heading size="2xl" as="b" style={{ color: "purple" }}>
+        <Heading size="2xl" as="b" style={{ color: "black" }}>
           Login
         </Heading>
       </Center>
@@ -156,9 +159,10 @@ const Login = () => {
             className={`${styles.Nunito}`}
             style={{ fontSize: "1.5rem", fontWeight: "bold" }}
           >
-            Email :
+            Email  
             <span className={validName ? `${styles.valid}` : `${styles.hide}`}>
               <FontAwesomeIcon
+                
                 icon={faCheck}
                 style={{ color: "green" }}
               ></FontAwesomeIcon>
@@ -171,6 +175,8 @@ const Login = () => {
             </span>
           </FormLabel>
           <Input
+            bg={"white"}
+            
             type="text"
             id="username"
             placeholder="Enter Email"
@@ -205,7 +211,7 @@ const Login = () => {
             className={`${styles.Nunito}`}
             style={{ fontSize: "1.5rem", fontWeight: "bold" }}
           >
-            Password :
+            Password 
             <span className={validPwd ? `${styles.valid}` : `${styles.hide}`}>
               <FontAwesomeIcon
                 icon={faCheck}
@@ -221,6 +227,7 @@ const Login = () => {
           </FormLabel>
           <InputGroup>
             <Input
+              bg={"white"}
               type={show ? "text" : "password"}
               size={"lg"}
               placeholder="Enter Password"
@@ -235,21 +242,25 @@ const Login = () => {
               onBlur={() => setPwdFocus(false)}
             />
             <InputRightElement w="23%" marginBottom={2}>
-              <Button
+              {/* <Button
                 h="2.2rem"
                 variant="outline"
                 size="md"
                 bgColor={show ? "tomato" : "green.300"}
                 _hover={show ? { backgroundColor: "tomato" } : { backgroundColor: "lightgreen" }}
-                onClick={handleShowPasswordClick}
-                leftIcon={<FontAwesomeIcon icon={show ? faEyeSlash : faEye} />}
+                
+                leftIcon={""}
                 style={{ marginBottom: "1rem", marginTop: "1.4rem" }}
               >
                 {show ? "Hide" : "show"}
-              </Button>
+              </Button> */}
+              <FontAwesomeIcon onClick={handleShowPasswordClick}
+              
+              icon={show ? faEyeSlash : faEye}
+               />
             </InputRightElement>
           </InputGroup>
-          <p
+          <p 
             id="pwdnote"
             className={pwdFocus && !validPwd ? `${styles.instructions}` : `${styles.offscreen}`}
           >
@@ -285,6 +296,7 @@ const Login = () => {
             <ChakraLink
               as={ReactRouterLink}
               to="/register"
+              
               style={{ color: "blue" }}
             >
               Register
@@ -293,6 +305,7 @@ const Login = () => {
         </p>
       </form>
     </section>
+    </Box>
   )
 }
 

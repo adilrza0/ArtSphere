@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ListModel } = require("../model/list.model");
 const { auth } = require("../Middleware/auth.middleware");
-
+// userRouter.use(auth)
 userRouter.post("/register", async (req, res) => {
     const { username, name, email, role, avatar, password, age, favourites, subscription } = req.body;
     const user = await UserModel.findOne({ email });
@@ -32,7 +32,7 @@ userRouter.post("/register", async (req, res) => {
     }
 })
 
-userRouter.post("/login", async (req, res) => {
+userRouter.post("/login", auth,async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await UserModel.findOne({ email })
